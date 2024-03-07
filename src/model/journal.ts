@@ -1,14 +1,19 @@
-import { sequelize } from "@/config";
+import { User } from ".";
+import { sequelize } from "../config";
 import { DataTypes } from "sequelize";
 
 export const Journal = sequelize.define("journal", {
     id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
     },
     userId: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.STRING,
+        references: {
+            model: User,
+            key: 'id'
+        },
         allowNull: false
     },
     title: {

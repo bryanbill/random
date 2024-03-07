@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: jumba
       POSTGRES_PASSWORD: random
     ports:
-      - "5434:5434"
+      - "5434:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 

@@ -2,9 +2,9 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 
-import { config, sequelize } from '@/config';
-import router from '@/router';
-import { queue } from '@/service';
+import { config, sequelize } from './config';
+import router from './router';
+import { queue } from './service';
 
 /**
  * Initialize the express app and connect to the database
@@ -13,6 +13,7 @@ const init = async (): Promise<Express> => {
     const app: Express = express();
 
     await sequelize.authenticate();
+    await sequelize.sync();
 
     app.use(cors())
         .use(json())

@@ -1,11 +1,12 @@
 import { configDotenv } from "dotenv";
 
 configDotenv({
-    path: process.env.NODE_ENV === "development" ? ".env.dev" : ".env.prod"
+    path: ".env",
 })
 
 export default {
     App: {
+        Env: process.env.NODE_ENV,
         Name: process.env.APP_NAME,
         Url: process.env.APP_URL,
         Version: process.env.APP_VERSION,

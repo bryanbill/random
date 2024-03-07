@@ -1,5 +1,5 @@
-import { JournalObj } from "@/interface/journal"
-import { journal } from "@/service"
+import { JournalObj } from "../interface/journal"
+import { journal } from "../service"
 
 const getAllJournals = async (userId: string) => {
     const response = await journal.getJournals(userId);

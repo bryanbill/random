@@ -1,5 +1,5 @@
 import { JournalObj } from "@/interface/journal"
-import { Journal } from "@/model"
+import { Journal } from "../model"
 
 const getJournals = async (userId: string) => {
     const journals = await Journal.findAll({ where: { userId } });

@@ -1,6 +1,6 @@
-import { UserObj } from "@/interface/user"
+import { UserObj } from "../interface/user"
 
-import { User } from "@/model"
+import { User } from "../model"
 
 
 const getUserByEmail = async (email: string) => {

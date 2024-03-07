@@ -1,9 +1,9 @@
-import { sequelize } from "@/config";
+import { sequelize } from "../config";
 import { DataTypes } from "sequelize";
 
 export const User = sequelize.define("user", {
     id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
     },

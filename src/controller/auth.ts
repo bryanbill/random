@@ -1,6 +1,6 @@
-import { user, queue } from '@/service';
-import { redisClient } from '@/config';
-import { encodeJwt } from '@/middleware';
+import { user, queue } from '../service';
+import { redisClient } from '../config';
+import { encodeJwt } from '../middleware';
 
 const signIn = async (email: string) => {
     const response = await user.getUserByEmail(email);
