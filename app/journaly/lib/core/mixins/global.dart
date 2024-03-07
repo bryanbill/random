@@ -1,6 +1,5 @@
-
 mixin GlobalMixin {
   String? token;
 
-  String baseUrl = 'http://192.168.2.117:4000/v1';
+  String baseUrl = 'http://84.247.161.243:4000/v1';
 }
