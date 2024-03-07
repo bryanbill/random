@@ -28,10 +28,10 @@ const verifyOtp = async (email: string, otp: number) => {
     const savedOtp = await redisClient.get(email);
 
     if (savedOtp && (parseInt(savedOtp!) === otp)) {
-       console.log('OTP verified');
+        redisClient.del(email);
+
         const res = await user.getUserByEmail(email);
-        console.log(res);
-        
+
         const jwt = await encodeJwt({
             id: res.id,
             email: res.email
