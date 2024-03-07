@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/bryanbill/random#readme",
   "dependencies": {
+    "ava": "^6.1.2",
     "bullmq": "^5.4.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
