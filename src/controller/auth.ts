@@ -3,6 +3,7 @@ import { redisClient } from '../config';
 import { encodeJwt } from '../middleware';
 
 const signIn = async (email: string) => {
+
     const response = await user.getUserByEmail(email);
     if (!response) {
         await user.createUser({
@@ -24,12 +25,11 @@ const signIn = async (email: string) => {
     return;
 }
 
-const verifyOtp = async (email: string, otp: number) => {
+const verifyOtp = async (email: string, otp: string) => {
     const savedOtp = await redisClient.get(email);
+    redisClient.del(email);
 
-    if (savedOtp && (parseInt(savedOtp!) === otp)) {
-        redisClient.del(email);
-
+    if (savedOtp && (parseInt(savedOtp!) === parseInt(otp))) {
         const res = await user.getUserByEmail(email);
 
         const jwt = await encodeJwt({
@@ -37,7 +37,10 @@ const verifyOtp = async (email: string, otp: number) => {
             email: res.email
         });
 
-        return jwt;
+        return {
+            token: jwt,
+            ...res
+        };
     }
 
     return null;

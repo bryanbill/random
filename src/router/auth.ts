@@ -12,6 +12,12 @@ const router: Router = Router();
  */
 router.post('/sign-in', async (req, res) => {
     try {
+        if (!req.body.email) {
+            return res.status(400).json({
+                status: 1,
+                message: 'Email is required'
+            });
+        }
         await auth.signIn(req.body.email);
 
         return res.status(200).json({
@@ -20,7 +26,7 @@ router.post('/sign-in', async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        
+
         return res.status(500).json({
             status: 1,
             message: 'Internal server error',
@@ -49,9 +55,7 @@ router.post('/verify-otp', async (req, res) => {
         return res.status(200).json({
             status: 0,
             message: 'OTP verified',
-            data: {
-                token: response
-            },
+            data: response
         });
     } catch (err) {
         console.log(err);

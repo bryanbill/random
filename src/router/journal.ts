@@ -56,7 +56,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
 router.post('/', authMiddleware, async (req, res) => {
     try {
         const response = await journal.createJournal(req.user.id, req.body);
-        res.status(200).json({
+        res.status(201).json({
             status: 0,
             message: 'Success',
             data: response,

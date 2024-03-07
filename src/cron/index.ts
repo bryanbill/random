@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { Journal, User } from "@/model";
+import { Journal, User } from "../model";
 import { Op } from "sequelize";
 import { queue } from "../service";
 import shuffle from "lodash.shuffle";

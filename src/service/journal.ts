@@ -1,10 +1,13 @@
 import { JournalObj } from "../interface/journal"
 import { Journal, User } from "../model"
 
-const getJournals = async (userId: string) => {
+const getJournals = async (userId: string, query?: { limit: number, offset: number }) => {
     const journals = await Journal.findAll(
         {
             where: { userId },
+            limit: query?.limit ?? 10,
+            offset: query?.offset ?? 0,
+            order: [['createdAt', 'DESC']],
             include: [
                 {
                     model: User
