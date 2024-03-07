@@ -22,7 +22,10 @@ export const Journal = sequelize.define("journal", {
     },
     content: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: [0, 500]
+        }
     },
 
 }, {
