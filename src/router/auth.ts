@@ -10,16 +10,18 @@ const router: Router = Router();
  *  - email: string
  * 
  */
-router.post('/sign-in', (req, res) => {
+router.post('/sign-in', async (req, res) => {
     try {
-        const response = auth.signIn(req.body.email);
-        res.status(200).json({
+        await auth.signIn(req.body.email);
+
+        return res.status(200).json({
             status: 0,
             message: 'OTP sent to email',
         });
     } catch (err) {
         console.log(err);
-        res.status(500).json({
+        
+        return res.status(500).json({
             status: 1,
             message: 'Internal server error',
         });
@@ -34,10 +36,17 @@ router.post('/sign-in', (req, res) => {
  *  - otp: string
  * 
  */
-router.post('/verify-otp', (req, res) => {
+router.post('/verify-otp', async (req, res) => {
     try {
-        const response = auth.verifyOtp(req.body.email, req.body.otp);
-        res.status(200).json({
+        const response = await auth.verifyOtp(req.body.email, req.body.otp);
+        if (!response) {
+            return res.status(401).json({
+                status: 1,
+                message: 'Invalid OTP',
+            });
+        }
+
+        return res.status(200).json({
             status: 0,
             message: 'OTP verified',
             data: {
@@ -46,7 +55,7 @@ router.post('/verify-otp', (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
             status: 1,
             message: 'Internal server error',
         });

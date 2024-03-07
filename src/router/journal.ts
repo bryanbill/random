@@ -33,7 +33,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
         res.status(200).json({
             status: 0,
             message: 'Success',
-            data: journal,
+            data: response,
         });
     } catch (err) {
         console.log(err);

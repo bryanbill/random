@@ -45,14 +45,14 @@ const encodeJwt = async (payload: any): Promise<String | undefined> => {
     }
 
     const token = await new Promise((resolve, reject) => {
-        jwt.sign({}, config.Jwt.Secret!, {
+        jwt.sign(payload, config.Jwt.Secret!, {
             expiresIn: config.Jwt.ExpiresIn!,
         }, (err, encoded) => {
             if (err) {
                 reject(err);
             }
 
-            resolve(token);
+            resolve(encoded);
         });
     });
 

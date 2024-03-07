@@ -1,12 +1,28 @@
-import { JournalObj } from "@/interface/journal"
-import { Journal } from "../model"
+import { JournalObj } from "../interface/journal"
+import { Journal, User } from "../model"
 
 const getJournals = async (userId: string) => {
-    const journals = await Journal.findAll({ where: { userId } });
+    const journals = await Journal.findAll(
+        {
+            where: { userId },
+            include: [
+                {
+                    model: User
+                }
+            ]
+        },);
     return journals.map(journal => journal.dataValues);
 }
 const getJournal = async (userId: string, journalId: string) => {
-    const journal = await Journal.findOne({ where: { userId, id: journalId } });
+    const journal = await Journal.findOne(
+        {
+            where: {
+                userId, id: journalId
+            },
+            include: {
+                model: User
+            }
+        });
     return journal?.dataValues;
 }
 const createJournal = async (userId: string, journal: JournalObj) => {

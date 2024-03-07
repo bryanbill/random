@@ -24,10 +24,14 @@ const signIn = async (email: string) => {
     return;
 }
 
-const verifyOtp = async (email: string, otp: string) => {
+const verifyOtp = async (email: string, otp: number) => {
     const savedOtp = await redisClient.get(email);
-    if (savedOtp === otp) {
+
+    if (savedOtp && (parseInt(savedOtp!) === otp)) {
+       console.log('OTP verified');
         const res = await user.getUserByEmail(email);
+        console.log(res);
+        
         const jwt = await encodeJwt({
             id: res.id,
             email: res.email

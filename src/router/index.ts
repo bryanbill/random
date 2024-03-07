@@ -6,6 +6,6 @@ import journalRouter from './journal';
 const router: Router = Router();
 
 router.use('/auth', authRouter);
-router.use('/journal', journalRouter);
+router.use('/journals', journalRouter);
 
 export default router;

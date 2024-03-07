@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 
-import { config, sequelize } from './config';
+import { config, sequelize, redisClient } from './config';
 import router from './router';
 import { queue } from './service';
 
@@ -15,9 +15,12 @@ const init = async (): Promise<Express> => {
     await sequelize.authenticate();
     await sequelize.sync();
 
-    app.use(cors())
-        .use(json())
-        .use(`${config.App.Version}`, router)
+    await redisClient.connect();
+
+    app.use(cors());
+
+    app.use(json())
+    app.use(`/${config.App.Version}`, router);
 
     queue.worker.on('completed', (job) => {
         console.log(`Job with id ${job.id} has been completed`);
@@ -28,7 +31,6 @@ const init = async (): Promise<Express> => {
     })
 
     return app;
-
 }
 
 init().then((app) => {
