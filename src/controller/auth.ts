@@ -1,11 +1,46 @@
-const signIn = async (email: string) => { }
+import { user, queue } from '@/service';
+import { redisClient } from '@/config';
+import { encodeJwt } from '@/middleware';
 
-const verifyOtp = async (email: string, otp: string) => { }
+const signIn = async (email: string) => {
+    const response = await user.getUserByEmail(email);
+    if (!response) {
+        await user.createUser({
+            email
+        });
+    }
 
-const refreshToken = async (refreshToken: string) => { }
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    redisClient.set(email, otp, {
+        EX: 60 * 5
+    });
+
+    queue.addToQueue({
+        to: email,
+        subject: 'OTP for login',
+        text: `Your OTP is ${otp}`
+    });
+
+    return;
+}
+
+const verifyOtp = async (email: string, otp: string) => {
+    const savedOtp = await redisClient.get(email);
+    if (savedOtp === otp) {
+        const res = await user.getUserByEmail(email);
+        const jwt = await encodeJwt({
+            id: res.id,
+            email: res.email
+        });
+
+        return jwt;
+    }
+
+    return null;
+}
+
 
 export {
     signIn,
     verifyOtp,
-    refreshToken
 }
