@@ -82,6 +82,16 @@ class _HomePageState extends State<HomePage> {
       titleController.clear();
       contentController.clear();
     });
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Journal created successfully"),
+          padding: EdgeInsets.all(8),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   @override
