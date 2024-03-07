@@ -1,24 +1,16 @@
 version: "3"
 
 services:
-  random:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-      - redis
-
   postgres:
     image: postgres:latest
     container_name: random
     restart: always
     environment:
-      POSTGRES_DB: jumba
+      POSTGRES_DB: random
       POSTGRES_USER: jumba
-      POSTGRES_PASSWORD: abmuj101!!
+      POSTGRES_PASSWORD: random
     ports:
-      - "5432:5432"
+      - "5434:5434"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 

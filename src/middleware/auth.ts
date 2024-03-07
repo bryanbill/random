@@ -14,7 +14,7 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
             return res.status(401).send('Unauthorized');
         }
 
-        const payload = decodeJwt(token) as { id: number, email: string }
+        const payload = decodeJwt(token) as { id: string, email: string }
         if (typeof payload === 'string') {
             throw new Error('Invalid JWT payload');
         }
