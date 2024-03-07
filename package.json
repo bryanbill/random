@@ -1,0 +1,42 @@
+{
+  "name": "random",
+  "version": "0.3.7",
+  "description": "random journal app allowing users to note down their thoughts every day and share them with other journal-ers",
+  "main": "src/index.ts",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanbill/random.git"
+  },
+  "keywords": [
+    "Journal",
+    "App",
+    "Typescript",
+    "Flutter",
+    "Jest"
+  ],
+  "author": "Brian Omondi <emobrya@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryanbill/random/issues"
+  },
+  "homepage": "https://github.com/bryanbill/random#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/uuid": "^9.0.8",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  }
+}
