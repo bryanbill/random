@@ -24,6 +24,7 @@ export default {
         ExpiresIn: process.env.JWT_EXPIRES_IN,
     },
     Smtp: {
+        Service: process.env.SMTP_SERVICE,
         Host: process.env.SMTP_HOST,
         Port: process.env.SMTP_PORT,
         User: process.env.SMTP_USER,
